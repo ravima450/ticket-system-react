@@ -1,0 +1,9 @@
+.input_card{
+    width: 500px;
+    overflow: auto;
+    max-height: 100%;
+}
+
+.form_error{
+    right: 10px;
+}

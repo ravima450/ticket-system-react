@@ -1,10 +1,14 @@
-import React, { ChangeEvent, FormEvent, useState } from "react"
+import React, { ChangeEvent, FormEvent, useContext, useState } from "react"
 import purpleImage from '../../../assets/images/3d-purple.jpg';
 import './login.css';
+import {useNavigate} from "react-router-dom"
 import * as yup from "yup"
 import {loginSchema} from '../../../validation/login'
+import { ThemeContext } from "../../../context/ThemeContext";
 export function Login() {
 
+    const Navigate = useNavigate()
+    const {theme, toggleTheme} = useContext(ThemeContext)
 
     const defaultModel = { username : '', password : '' }
 
@@ -41,10 +45,14 @@ export function Login() {
             return {...a, [fieldname] : fieldValue}
         })
     }
+    const registerPage = ()=>{
+        Navigate('/register')
+    }
 
     return <>
         <div className="bg">
-            {/* <button  onClick={login}> chckkk</button> */}
+            {theme}
+            <button  type="button" onClick={toggleTheme}> {theme}</button>
             <div className="input_card glass_effect">
                 <div className="font-bold text-2xl  text-center text-white	">Login</div>
                 <form  onSubmit={login}>
@@ -82,6 +90,9 @@ export function Login() {
                 <div className="mt-8 text-center">
                     <button type="submit" className="focus:outline-none w-full text-gray-950 bg-white hover:bg-gray-200 focus:ring-4 focus:ring-gray-500 font-medium rounded-full text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Login</button>
                 </div>
+                <div className='text-end'>
+                    <button type='button' className='underline  decoration-1 text-underline text-sm text-white' onClick={registerPage}>Create a new account</button>
+                    </div>
                 </form>
 
             </div>
